@@ -1,0 +1,305 @@
+using System;  
+public class book {  
+   public  string book_name{ get; set; }
+    public string book_author{ get; set; }
+   public string book_id{ get; set; }
+    public string book_type{ get; set; }
+    public int book_copy{ get; set; }
+  //  public  string book_name;
+  //   public string book_author;
+  //  public string book_id;
+  //   public string book_type;
+  //   public int book_copy;
+
+
+
+   public static int InstanceCounter = -1;
+    public static string _name="hello";
+     public static  string _author="".ToString();
+      public static  string _type="";
+       public static string _id = "";
+   
+  public book()
+   {
+       
+   }
+   public book(string name,string author,string id,string type,int copy)
+   {
+       book_name=name;
+      book_author=author;
+       book_id=id;
+      book_type=type;
+      book_copy=copy;
+      //InstanceCounter = copy;
+      //_name=book_name;
+      //_author=author;
+      //_id=id;
+      //_type=type;
+  
+   }
+   
+  
+
+
+   
+   public void add_book_copy(int x)
+   {
+      book_copy=book_copy + x;
+        InstanceCounter = book_copy;
+        _name=book_name;
+         Console.WriteLine("total_book_info      called   {0}    {1}",InstanceCounter,_name);
+   }
+    
+
+
+
+ 
+       public static void show_total_book_info() {
+
+        InstanceCounter = InstanceCounter ;
+        Console.WriteLine("total_book_info      called   {0}",InstanceCounter);
+    }
+
+
+   
+   public void show_info()
+   {
+         Console.WriteLine("book_name :{0}", this.book_name);
+         Console.WriteLine("book_name :{0}", this.book_author); 
+         Console.WriteLine("book_name :{0}", this.book_id); 
+         Console.WriteLine("book_name :{0}", this.book_type); 
+         Console.WriteLine("book_name :{0}", this.book_copy); 
+         
+       
+       
+   }
+   
+   
+    public string name {  
+        get {  
+            return book_name;  
+        }  
+        set {  
+            book_name = value;  
+        }  
+    }  
+    
+    // public string author {  
+    //     get {  
+    //         return book_author;  
+    //     }  
+    //     set {  
+    //         book_author = value;  
+    //     }  
+    // }
+    // public string id {  
+    //     get {  
+    //         return book_id;  
+    //     }  
+    //     set {  
+    //         book_id = value;  
+    //     }  
+    // }
+    
+    // public string type {  
+    //     get {  
+    //         return book_type;  
+    //     }  
+    //     set {  
+    //         book_type = value;  
+    //     }  
+    // }
+    
+    // public int copy{  
+    //     get {  
+    //         return book_copy;  
+    //     }  
+    //     set {  
+    //         book_copy = value;  
+    //     }  
+    // }
+    
+    
+}  
+
+ 
+public class library : book{ 
+
+
+   public string lib_name{ get; set; }
+    public string lib_address{ get; set; }
+   //public string book_id{ get; set; }
+   // public string book_type{ get; set; }
+    public int total_book{ get; set; }
+  
+book[] book = new book[100];
+  public library()
+  {
+//var book = new book[100];
+  }
+  public library(string name,string address,int total)
+  {
+    lib_name = name;
+    lib_address = address;
+    total_book = total;
+
+  }
+public book[] create_library()
+{
+  var book = new book[100];
+  Console.WriteLine($"how many book the library have at the very frist day it is built ?  ");
+  int count = Convert.ToInt32(Console.ReadLine());
+   string g,h,i;
+  for(int a=0;a<count;a++)
+  { book[a] = new book();
+    Console.WriteLine($"Enter value of book[{a}] name : ");
+    g = Console.ReadLine();
+    book[a].book_name = g;
+    Console.WriteLine($"Enter value of book[{a}] author : ");
+    h=Console.ReadLine();
+    book[a].book_author =h;
+    Console.WriteLine($"Enter value of book[{a}] id: ");
+    i=Console.ReadLine();
+    book[a].book_id =i;
+    Console.WriteLine($"Enter value of book[{a}] copy : ");
+    book[a].book_copy =Convert.ToInt32(Console.ReadLine());
+
+
+  }
+
+return book;
+}
+
+
+public void  add_new_book( book b)
+{
+Console.WriteLine("Enter index number ( 0 - 99 )  in which you want to add this book,book name  {0} : \n",b.book_name);
+//string g,h,i;
+int aa =Convert.ToInt32(Console.ReadLine());
+ 
+   book[aa] = new book();
+   //Console.WriteLine("name -> {0} ",b.book_name);
+  book[aa].name = b.name;
+   //Console.WriteLine("name -># {0} ",book[aa].name );
+  book[aa].book_author = b.book_author;
+  book[aa].book_id = b.book_id;
+  book[aa].book_type = b.book_type;
+  book[aa].book_copy = b.book_copy;
+
+}
+
+
+
+public void delete_book(book b)
+{
+Console.WriteLine("\n after deleting book name ->## {0} ",b.name );
+for(int j=0;j<book.Length;j++)
+{
+  try{
+if (book[j].book_id == b.book_id && book[j].book_author == b.book_author && book[j].book_name == b.book_name )
+{
+ // Console.WriteLine("name ->#># {0} ",book[j].name );
+book[j] = new book();
+ 
+}
+   }catch(Exception )
+    {
+      //Console.WriteLine("no books in this place of the library");
+    }
+}
+
+
+}
+
+
+
+
+public void add_new_book_copy(book b,int copy)
+{ 
+  Console.WriteLine("\n after adding {1} new  book copy of  book name ->## {0} ",b.name,copy );
+
+for(int j=0;j<book.Length;j++)
+{
+  try{
+if (book[j].book_id == b.book_id && book[j].book_author == b.book_author && book[j].book_name == b.book_name )
+{
+ // Console.WriteLine("name ->#># {0} ",book[j].name );
+book[j].book_copy = book[j].book_copy + copy ;
+ 
+}
+   }catch(Exception )
+    {
+      //Console.WriteLine("no books in this place of the library");
+    }
+}
+
+
+
+
+
+}
+
+
+public void show_library()
+{
+  Console.WriteLine("showing the books of this library : \n");
+  for(int i=0;i<book.Length;i++)
+  {
+    try{
+      if(book[i].book_copy>0)
+      {
+    Console.WriteLine($"..............library place no : {i}  ................");
+    Console.WriteLine(" book  name : {0}",this.book[i].book_name);
+    Console.WriteLine(" book  author : {0}",book[i].book_author);
+    Console.WriteLine(" book  id : {0}",book[i].book_id);
+    Console.WriteLine(" book  type : {0}",book[i].book_type);
+    Console.WriteLine(" book  copy : " + book[i].book_copy);
+    }
+    }catch(Exception )
+    {
+      //Console.WriteLine("no books in this place of the library");
+    }
+
+  }
+}
+         
+         
+         
+         //}
+
+//  book_name=name;
+//       book_author=author;
+//        book_id=id;
+//       book_type=type;
+//       book_copy=copy;
+
+}
+
+
+public static class  Departmentmain {  
+    public static   int Main(string[] args) {  
+        book d = new book();  
+        d.book_name = "Communication";  
+        Console.WriteLine("The book name is :{0}", d.book_name); 
+         book d1 = new book("bangla","sorot_condro","12-7a","story",1);   
+          book d2 = new book("banglali","sorot_condro","12-7a","story",1); 
+        d1.show_info();
+        d1.add_book_copy(12);
+        d2.add_book_copy(1);
+        book.show_total_book_info();
+        library li=new library();
+        //library li1=new library();
+
+//li.book[] a =li.create_library();
+      // li.delete_book(d1,li.add_new_book(d1,li.create_library()));
+      
+       li.add_new_book(d1);
+       li.add_new_book(d2);
+       li.show_library();
+       li.delete_book(d1);
+       li.show_library();
+       li.add_new_book_copy(d2,5);
+       li.show_library();
+        return 0;  
+    }  
+}
